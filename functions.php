@@ -57,109 +57,67 @@
 	function filter(SimplePie_Item $item, array $feedinfo) {
 		$patterns = $feedinfo["patterns"];
 		$anyOrAll = $feedinfo["anyOrAll"];
-		
+
 		$blockOrPermit = $feedinfo["blockOrPermit"];
-		
+
 		$result = true;
-		if(($blockOrPermit == 'permit' && $anyOrAll == 'any') || ($blockOrPermit == 'block' && $anyOrAll == 'all')){
+		if(($blockOrPermit == 'permit' && $anyOrAll == 'any') || ($blockOrPermit == 'block' && $anyOrAll == 'all')) {
 			$result = false;
 		}
-		
+
 		foreach($patterns as $pattern) {
 			switch($pattern["field"]) {
 				case "title":
 					if(preg_match($pattern["regex"], $item->get_title())) {
-						if($anyOrAll == 'any'){
-							if($blockOrPermit == 'permit'){
-								return true;
-							}else{//$blockOrPermit == 'block'
-								return false;
-							}
+						if($anyOrAll == 'any') {
+							return $blockOrPermit == 'permit';
 						}
-					}else{
-						if($anyOrAll == 'all'){
-							if($blockOrPermit == 'permit'){
-								return false;
-							}else{//$blockOrPermit == 'block'
-								return true;
-							}
-						}
+					} elseif($anyOrAll == 'all'){
+						return $blockOrPermit != 'permit';
 					}
 					break;
 				case "summary":
 					if(preg_match($pattern["regex"], $item->get_description())) {
-						if($anyOrAll == 'any'){
-							if($blockOrPermit == 'permit'){
-								return true;
-							}else{//$blockOrPermit == 'block'
-								return false;
-							}
+						if($anyOrAll == 'any') {
+							return $blockOrPermit == 'permit';
 						}
-					}else{
-						if($anyOrAll == 'all'){
-							if($blockOrPermit == 'permit'){
-								return false;
-							}else{//$blockOrPermit == 'block'
-								return true;
-							}
+					} else {
+						if($anyOrAll == 'all') {
+						    return $blockOrPermit != 'permit';
 						}
 					}
 					break;
 				case "content":
 					if(preg_match($pattern["regex"], $item->get_content())) {
-						if($anyOrAll == 'any'){
-							if($blockOrPermit == 'permit'){
-								return true;
-							}else{//$blockOrPermit == 'block'
-								return false;
-							}
+						if($anyOrAll == 'any') {
+							return $blockOrPermit == 'permit';
 						}
-					}else{
-						if($anyOrAll == 'all'){
-							if($blockOrPermit == 'permit'){
-								return false;
-							}else{//$blockOrPermit == 'block'
-								return true;
-							}
+					} else {
+						if($anyOrAll == 'all') {
+						    return $blockOrPermit != 'permit';
 						}
 					}
 					break;
 				case "url":
 					if(preg_match($pattern["regex"], $item->get_permalink())) {
-						if($anyOrAll == 'any'){
-							if($blockOrPermit == 'permit'){
-								return true;
-							}else{//$blockOrPermit == 'block'
-								return false;
-							}
+						if($anyOrAll == 'any') {
+							return $blockOrPermit == 'permit';
 						}
-					}else{
-						if($anyOrAll == 'all'){
-							if($blockOrPermit == 'permit'){
-								return false;
-							}else{//$blockOrPermit == 'block'
-								return true;
-							}
+					} else {
+						if($anyOrAll == 'all') {
+						    return $blockOrPermit != 'permit';
 						}
 					}
 					break;
 				case "category":
 					foreach($item->get_categories() as $category) {
-						if(preg_match($pattern["regex"], $category->get_term()) || preg_match($pattern["regex"], $category->get_label())){ 
-							if($anyOrAll == 'any'){
-								if($blockOrPermit == 'permit'){
-									return true;
-								}else{//$blockOrPermit == 'block'
-									return false;
-								}
+						if(preg_match($pattern["regex"], $category->get_term()) || preg_match($pattern["regex"], $category->get_label())){
+							if($anyOrAll == 'any') {
+							    return $blockOrPermit == 'permit';
 							}
-						}else{
-							if($anyOrAll == 'all'){
-								if($blockOrPermit == 'permit'){
-									return false;
-								}else{//$blockOrPermit == 'block'
-									return true;
-								}
+						} else {
+							if($anyOrAll == 'all') {
+						        return $blockOrPermit != 'permit';
 							}
 						}
 					}
@@ -167,20 +125,12 @@
 				case "author":
 					foreach($item->get_authors() as $author) {
 						if(preg_match($pattern["regex"], $author->get_name())) {
-							if($anyOrAll == 'any'){
-								if($blockOrPermit == 'permit'){
-									return true;
-								}else{//$blockOrPermit == 'block'
-									return false;
-								}
+							if($anyOrAll == 'any') {
+							    return $blockOrPermit == 'permit';
 							}
-						}else{
-							if($anyOrAll == 'all'){
-								if($blockOrPermit == 'permit'){
-									return false;
-								}else{//$blockOrPermit == 'block'
-									return true;
-								}
+						} else {
+							if($anyOrAll == 'all') {
+						        return $blockOrPermit != 'permit';
 							}
 						}
 					}
@@ -188,20 +138,12 @@
 				case "contributor":
 					foreach($item->get_contributors() as $contributor) {
 						if(preg_match($pattern["regex"], $contributor->get_name())) {
-							if($anyOrAll == 'any'){
-								if($blockOrPermit == 'permit'){
-									return true;
-								}else{//$blockOrPermit == 'block'
-									return false;
-								}
+							if($anyOrAll == 'any') {
+							    return $blockOrPermit == 'permit';
 							}
-						}else{
-							if($anyOrAll == 'all'){
-								if($blockOrPermit == 'permit'){
-									return false;
-								}else{//$blockOrPermit == 'block'
-									return true;
-								}
+						} else {
+							if($anyOrAll == 'all') {
+						        return $blockOrPermit != 'permit';
 							}
 						}
 					}

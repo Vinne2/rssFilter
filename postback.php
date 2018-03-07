@@ -73,7 +73,7 @@
 
     if($mode == "setFeedProperties") {
 	$anyOrAll = $_REQUEST["anyOrAll"];
-	if($anyOrAll != 'all'){
+	if($anyOrAll != 'all') {
 		$anyOrAll = 'any';
 	}
 	$blockOrPermit = $_REQUEST["blockOrPermit"];

@@ -19,7 +19,7 @@
             <input type="hidden" name="mode" value="setFeedProperties">
             <input type="hidden" name="feedID" value="{$feed["ID"]}">
             Max Items: <input type="text" name="maxItems" value="{$feed["maxItems"]}">
-            <br />
+            <br>
             <select name="blockOrPermit">
             <option value="block"{if $feed["blockOrPermit"] ne 'permit'} selected="selected"{/if}>Block</option>
             <option value="permit"{if $feed["blockOrPermit"] eq 'permit'} selected="selected"{/if}>Permit</option>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 header('Content-type: application/atom+xml');
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 ?>
@@ -32,7 +32,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
     $feed->handle_content_type();
 ?>
     <title><?= $feed->get_title(); ?></title>
-    <?php 
+    <?php
     $protocol = 'http';
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
         $protocol = 'https';
